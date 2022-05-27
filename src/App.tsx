@@ -1,10 +1,17 @@
 import React from 'react';
-import './App.css';
+import style from './App.module.scss';
+import Calendar from './companents/calendar/Calendar';
+import SearchField from './companents/searchfield/SearchField';
+import Weather from './companents/weather/Weather';
 
 function App() {
   return (
-    <div>
-      <p>Aplication</p>
+    <div className={style.app}>
+      <div className={style.container}>
+        <Calendar />
+        <SearchField />
+        <Weather />
+      </div>
     </div>
   );
 }

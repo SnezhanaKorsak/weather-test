@@ -1,0 +1,33 @@
+@import "../src/sass/variables";
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../src/assets/images/clear.jpg");
+  background-size: cover;
+
+  .container {
+    display: grid;
+    grid-template-rows: 60% 40%;
+    grid-template-areas: 'calendar search' 'weather weather';
+    width: 70%;
+    height: 70%;
+    background-color: rgba(64, 67, 75, 0.4);
+    border-radius: 5px;
+    box-shadow: 10px 14px 28px rgba(0, 0, 0, 0.25),
+    5px 10px 10px rgba(0, 0, 0, 0.22);
+
+    @media (max-width: $phone) {
+      width: 85%;
+      height: 85%;
+      grid-template-areas: 'search' 'weather' 'calendar';
+      grid-template-rows: 30% 40% 30%;
+    }
+
+  }
+}
+
+
