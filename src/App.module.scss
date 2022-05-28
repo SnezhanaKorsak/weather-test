@@ -12,6 +12,7 @@
   .container {
     display: grid;
     grid-template-rows: 60% 40%;
+    grid-template-columns: 55% 45%;
     grid-template-areas: 'calendar search' 'weather weather';
     width: 70%;
     height: 70%;
@@ -20,11 +21,16 @@
     box-shadow: 10px 14px 28px rgba(0, 0, 0, 0.25),
     5px 10px 10px rgba(0, 0, 0, 0.22);
 
+    @media (max-width: $table) {
+      grid-template-columns: 40% 60%;
+    }
+
     @media (max-width: $phone) {
       width: 85%;
       height: 85%;
       grid-template-areas: 'search' 'weather' 'calendar';
       grid-template-rows: 30% 40% 30%;
+      grid-template-columns: 100% 100%;
     }
 
   }
