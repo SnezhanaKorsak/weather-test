@@ -16,6 +16,7 @@ function SearchField({placeName}: SearchFieldProps) {
   const coordinates = useAppSelector((state) => state.weather.coordinates);
 
   const [address, setAddress] = useState(placeName.split(',')[0]);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCoordinates(address));
@@ -26,14 +27,17 @@ function SearchField({placeName}: SearchFieldProps) {
   };
 
   const sendRequest = () => {
+    setDisabled(true);
     const weatherDataFromCache = localStorage.getItem(address);
 
     if (weatherDataFromCache) {
       dispatch(setWeatherDataFromCache(JSON.parse(weatherDataFromCache)));
+      setDisabled(false);
     } else if (coordinates) {
       const {latitude, longitude} = coordinates;
       dispatch(fetchPlaceName(longitude, latitude));
       dispatch(fetchWeatherData(latitude, longitude));
+      setDisabled(false);
     }
   };
 
@@ -51,7 +55,7 @@ function SearchField({placeName}: SearchFieldProps) {
       </div>
       <div className={style.search}>
         <input type="text" value={address} onChange={changeHandler} onKeyPress={pressHandler} />
-        <button type="button" onClick={sendRequest}>
+        <button type="button" onClick={sendRequest} disabled={disabled}>
           Search
         </button>
       </div>

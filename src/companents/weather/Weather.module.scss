@@ -1,5 +1,7 @@
 .container {
   grid-area: weather;
+  display: grid;
+  grid-template-columns: 30% 70%;
   background-color: rgba(46, 47, 52, 0.5);
   padding: 20px;
 }

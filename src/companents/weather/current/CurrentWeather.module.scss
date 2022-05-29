@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+  margin-left: -10px;
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    margin: -10px 0 0 -20px;
+
+    .day {
+      width: 60px;
+      height: 20px;
+      background-color: #28374e;
+      border-radius: 10px;
+      font-size: 12px;
+      text-align: center;
+      line-height: 20px;
+    }
+    .temp {
+      font-size: 30px;
+      padding-left: 10px;
+    }
+  }
+}
