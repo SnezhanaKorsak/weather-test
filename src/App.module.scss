@@ -32,6 +32,10 @@
       grid-template-columns: 100% 100%;
     }
 
+    @media (min-width: $desktop){
+      width: 60%;
+      height: 60%;
+    }
   }
 }
 
