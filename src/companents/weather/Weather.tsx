@@ -1,8 +1,8 @@
 import React from 'react';
 import {useAppSelector} from '../../state/hooks';
-import style from './Weather.module.scss';
 import CurrentWeather from './current/CurrentWeather';
 import DailyWeather from './forecast/DailyWeather';
+import style from './Weather.module.scss';
 
 function Weather() {
   const weather = useAppSelector((state) => state.weather.weatherData);

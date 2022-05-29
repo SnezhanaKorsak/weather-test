@@ -11,6 +11,10 @@
     margin-bottom: 15px;
   }
 
+  .icon {
+    filter: contrast(3)
+  }
+
   .description {
     display: flex;
     flex-direction: column;

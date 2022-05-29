@@ -6,20 +6,14 @@
   text-align: right;
 
   @media (max-width: $phone) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
     text-align: left;
-    padding: 10px 20px 10px 20px;
   }
 
   .location {
     margin: 5px 0 20px 0;
 
     @media (max-width: $phone) {
-      display: flex;
-      margin-bottom: 0;
+      margin-bottom: 10px;
     }
 
     .city {
@@ -30,8 +24,7 @@
       font-size: 0.85rem;
 
       @media (max-width: $phone) {
-        margin-left: 15px;
-        font-size: 1rem;
+        font-size: 0.85rem;
       }
     }
   }
@@ -67,49 +60,4 @@
       }
     }
   }
-
-  .searchType {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
-    margin-top: 15px;
-    padding: 5px;
-    border-radius: 0 0 5px 5px;
-    box-shadow: 10px 14px 28px rgba(0, 0, 0, 0.25),
-    5px 10px 10px rgba(0, 0, 0, 0.22);
-
-    @media (max-width: $phone) {
-      width: 100%;
-      margin-top: 0;
-    }
-
-    .label {
-      position: absolute;
-      display: block;
-      top: -25px;
-      left: 50%;
-      width: 150px;
-      transform: translate(-50%, 50%);
-      font-size: 16px;
-      @media (max-width: $phone) {
-        top: -20px;
-        left: 60%;
-        font-size: 14px;
-      }
-    }
-
-    .radio {
-      font-size: 16px;
-      @media (max-width: $phone) {
-        font-size: 14px;
-      }
-
-      & input {
-        margin-right: 5px;
-      }
-    }
-  }
-
 }

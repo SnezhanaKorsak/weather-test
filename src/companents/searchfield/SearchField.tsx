@@ -65,18 +65,6 @@ function SearchField({placeName}: SearchFieldProps) {
           Search
         </button>
       </div>
-      <div className={style.searchType}>
-        <span className={style.label}>Weather services</span>
-        <div className={style.radio}>
-          <input type="radio" name="services" value="openweather" checked />
-          openWeather
-        </div>
-
-        <div className={style.radio}>
-          <input type="radio" name="services" value="stormglass" />
-          stormGlass
-        </div>
-      </div>
     </div>
   );
 }

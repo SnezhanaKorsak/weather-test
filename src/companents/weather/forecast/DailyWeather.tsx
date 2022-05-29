@@ -1,7 +1,7 @@
 import React from 'react';
 import {useAppSelector} from '../../../state/hooks';
-import style from './DailyWeather.module.scss';
 import DailyItem from './DailyItem';
+import style from './DailyWeather.module.scss';
 
 function DailyWeather() {
   const dailyWeather = useAppSelector((state) => state.weather.weatherData.daily);
@@ -10,13 +10,9 @@ function DailyWeather() {
     return null;
   }
 
-  const today = new Date().getDay();
-
   const dailyItems = dailyWeather
-    .filter((item) => new Date(item.dt * 1000).getDay() !== today)
-    .map((item) => (
-      <DailyItem key={item.dt} dt={item.dt} temperature={item.temp.day} icon={item.weather[0].icon} />
-    ));
+    .slice(0, 6)
+    .map((item) => <DailyItem key={item.dt} dt={item.dt} temperature={item.temp.day} icon={item.weather[0].icon} />);
 
   return <div className={style.container}>{dailyItems}</div>;
 }

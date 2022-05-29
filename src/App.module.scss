@@ -6,7 +6,6 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  //background-image: url("../src/assets/images/clear.jpg");
   background-size: cover;
 
   .container {
@@ -29,7 +28,7 @@
       width: 85%;
       height: 85%;
       grid-template-areas: 'search' 'weather' 'calendar';
-      grid-template-rows: 30% 50% 20%;
+      grid-template-rows: 25% 50% 25%;
       grid-template-columns: 100% 100%;
     }
 

@@ -13,7 +13,7 @@ function CurrentWeather() {
 
   return (
     <div className={style.container}>
-      <div>
+      <div className={style.icon}>
         <img src={`https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`} alt="icon" />
       </div>
       <div className={style.description}>
