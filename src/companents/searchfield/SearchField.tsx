@@ -33,7 +33,7 @@ function SearchField({placeName}: SearchFieldProps) {
     } else if (coordinates) {
       const {latitude, longitude} = coordinates;
       dispatch(fetchPlaceName(longitude, latitude));
-      dispatch(fetchWeatherData(latitude, longitude, address));
+      dispatch(fetchWeatherData(latitude, longitude));
     }
   };
 

@@ -2,13 +2,15 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppDispatch, AppRootState} from './store';
 import geocodingAPI from '../api/geocoding-api';
 import openWeatherAPI from '../api/openweather-api';
-import {Coordinates, CurrentForecast, DailyForecast} from '../api/types';
+import {Coordinates, CurrentWeather, DailyForecast} from '../api/types';
 
 type InitialState = {
   placeName: string;
   coordinates: null | Coordinates;
   weatherData: {
-    current: null | CurrentForecast;
+    timezone: string;
+    offset: number;
+    current: null | CurrentWeather;
     daily: null | DailyForecast[];
   };
 };
@@ -17,6 +19,8 @@ const initialState: InitialState = {
   placeName: '',
   coordinates: null,
   weatherData: {
+    timezone: '',
+    offset: 0,
     current: null,
     daily: null,
   },
@@ -32,14 +36,16 @@ export const weatherSlice = createSlice({
     setCoordinates: (state, action: PayloadAction<{coordinates: number[]}>) => {
       state.coordinates = {longitude: action.payload.coordinates[0], latitude: action.payload.coordinates[1]};
     },
-    setWeatherData: (state, action: PayloadAction<{current: CurrentForecast; daily: DailyForecast[]}>) => {
+    setWeatherData: (
+      state,
+      action: PayloadAction<{current: CurrentWeather; daily: DailyForecast[]; timezone: string; offset: number}>,
+    ) => {
       state.weatherData = action.payload;
     },
     setWeatherDataFromCache: (state, action: PayloadAction<InitialState>) => {
       state.placeName = action.payload.placeName;
       state.coordinates = action.payload.coordinates;
       state.weatherData = action.payload.weatherData;
-      console.log(state.placeName);
     },
   },
 });
@@ -63,12 +69,14 @@ export const fetchCoordinates = (placeName: string) => (dispatch: AppDispatch) =
 };
 
 export const fetchWeatherData =
-  (latitude: number, longitude: number, placeName: string) => (dispatch: AppDispatch, getState: () => AppRootState) => {
+  (latitude: number, longitude: number) => (dispatch: AppDispatch, getState: () => AppRootState) => {
     localStorage.setItem('expiresIn', JSON.stringify(new Date().getTime() + 60 * 60 * 1000));
 
     openWeatherAPI.getDailyForecast(latitude, longitude).then((res) => {
-      dispatch(setWeatherData({current: res.data.current, daily: res.data.daily}));
+      const {current, daily, timezone, timezone_offset: offset} = res.data;
+      dispatch(setWeatherData({current, daily, timezone, offset}));
       const weatherData = getState().weather;
-      localStorage.setItem(placeName, JSON.stringify(weatherData));
+      const key = weatherData.placeName.split(',')[0];
+      localStorage.setItem(key, JSON.stringify(weatherData));
     });
   };

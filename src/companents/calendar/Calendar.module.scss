@@ -12,32 +12,36 @@
       font-size: 0.5em;
     }
   }
-  .period {
-    display: flex;
-    margin-top: 20px;
+  .timeBlock {
+    position: relative;
 
     @media (max-width: $phone) {
       display: none;
     }
+    .period {
+      display: flex;
+      margin-top: 20px;
 
-    .point {
-      width: 60px;
-      height: 30px;
-      margin-right: 15px;
+      .point {
+        width: 90px;
+        height: 30px;
+        margin-right: 15px;
+        background-color: #28374e;
+        border-radius: 15px;
+        text-align: center;
+        line-height: 30px;
+      }
+      .description {
+        line-height: 30px;
+      }
+    }
+    .separator {
+      position: absolute;
+      left: 45px;
+      width: 2px;
+      height: 20px;
       background-color: #28374e;
-      border-radius: 15px;
-      text-align: center;
-      line-height: 30px;
-    }
-    .description {
-      line-height: 30px;
     }
   }
-  .separator {
-    position: absolute;
-    left: 48px;
-    width: 2px;
-    height: 20px;
-    background-color: #28374e;
-  }
+
 }

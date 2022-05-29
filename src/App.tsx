@@ -9,15 +9,12 @@ import {fetchPlaceName, fetchWeatherData} from './state/weatherReducer';
 function App() {
   const dispatch = useAppDispatch();
   const placeName = useAppSelector((state) => state.weather.placeName);
-  console.log(placeName);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((res) => {
       const {latitude, longitude} = res.coords;
       dispatch(fetchPlaceName(longitude, latitude));
-      if (placeName) {
-        const address = placeName.split(',')[0];
-        dispatch(fetchWeatherData(latitude, longitude, address));
-      }
+      dispatch(fetchWeatherData(latitude, longitude));
     });
   }, []);
 
