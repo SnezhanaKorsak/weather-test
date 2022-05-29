@@ -1,8 +1,13 @@
+@import "../../../sass/variables";
+
 .container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
+  @media (max-width: $phone) {
+    flex-wrap: wrap;
+  }
 
   .block {
     width: 60px;
@@ -12,6 +17,16 @@
     justify-content: space-between;
     align-items: center;
 
+    @media (max-width: $phone) {
+      display: grid;
+      grid-template-areas: 'day day' 'icon temp';
+      grid-template-rows: 50% 50%;
+      justify-items: center;
+      grid-gap: 10px;
+      width: 80px;
+      margin-bottom: 10px;
+    }
+
     .day {
       width: 40px;
       height: 20px;
@@ -20,13 +35,25 @@
       font-size: 12px;
       text-align: center;
       line-height: 20px;
+
+      @media (max-width: $phone) {
+        grid-area: day;
+        width: 70px;
+      }
     }
 
-    .icon  {
+    .icon {
       width: 60px;
       height: 60px;
 
-      &>img {
+      @media (max-width: $phone) {
+        grid-area: icon;
+        width: 50px;
+        height: 50px;
+        margin-top: -5px;
+      }
+
+      & > img {
         width: 100%;
         height: 100%;
       }
@@ -34,6 +61,14 @@
 
     .temp {
       margin-top: -5px;
+
+      @media (max-width: $phone) {
+        grid-area: temp;
+        width: 40px;
+        font-size: 16px;
+        padding-left: 10px;
+        margin: -10px 0 0 -20px;
+      }
     }
 
   }

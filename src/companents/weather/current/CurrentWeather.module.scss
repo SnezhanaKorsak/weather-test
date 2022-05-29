@@ -1,7 +1,15 @@
+@import "../../../sass/variables";
+
 .container {
   display: flex;
   align-items: center;
   margin-left: -10px;
+
+  @media (max-width: $phone) {
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
 
   .description {
     display: flex;
@@ -10,6 +18,9 @@
     align-items: center;
     height: 60px;
     margin: -10px 0 0 -20px;
+    @media (max-width: $phone) {
+      margin-left: 0;
+    }
 
     .day {
       width: 60px;
