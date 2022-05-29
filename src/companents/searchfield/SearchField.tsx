@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import style from './SearchField.module.scss';
+import debounce from 'lodash.debounce';
 import {useAppDispatch, useAppSelector} from '../../state/hooks';
 import {fetchCoordinates, fetchPlaceName, fetchWeatherData, setWeatherDataFromCache} from '../../state/weatherReducer';
+import style from './SearchField.module.scss';
 
 type SearchFieldProps = {
   placeName: string;
@@ -20,11 +21,11 @@ function SearchField({placeName}: SearchFieldProps) {
 
   useEffect(() => {
     dispatch(fetchCoordinates(address));
-  }, [address, dispatch]);
+  }, [address]);
 
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAddress(event.currentTarget.value);
-  };
+  const changeHandlerDebounced = debounce((value: string) => {
+    setAddress(value);
+  }, 1000);
 
   const sendRequest = () => {
     setDisabled(true);
@@ -54,7 +55,12 @@ function SearchField({placeName}: SearchFieldProps) {
         <span className={style.country}>{countryName}</span>
       </div>
       <div className={style.search}>
-        <input type="text" value={address} onChange={changeHandler} onKeyPress={pressHandler} />
+        <input
+          type="text"
+          placeholder={address}
+          onChange={(event) => changeHandlerDebounced(event.currentTarget.value)}
+          onKeyPress={pressHandler}
+        />
         <button type="button" onClick={sendRequest} disabled={disabled}>
           Search
         </button>
