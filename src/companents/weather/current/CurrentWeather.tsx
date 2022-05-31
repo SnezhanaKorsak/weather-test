@@ -3,13 +3,13 @@ import {useAppSelector} from '../../../state/hooks';
 import style from './CurrentWeather.module.scss';
 
 function CurrentWeather() {
-  const currentWeather = useAppSelector((state) => state.weather.weatherData.current);
+  const currentWeather = useAppSelector((state) => state.weather.currentWeather);
 
   if (!currentWeather) {
     return null;
   }
 
-  const temp = `${Math.ceil(currentWeather.temp)} °`;
+  const temp = `${Math.ceil(currentWeather.main.temp)} °`;
 
   return (
     <div className={style.container}>

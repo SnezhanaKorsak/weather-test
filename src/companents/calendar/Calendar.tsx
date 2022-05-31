@@ -14,12 +14,12 @@ const getTime = (time: number, offset: number) => {
 };
 
 function Calendar() {
-  const currentWeatherData = useAppSelector((state) => state.weather.weatherData.current);
-  const timezoneOffset = useAppSelector((state) => state.weather.weatherData.offset);
+  const currentWeather = useAppSelector((state) => state.weather.currentWeather);
 
-  if (!currentWeatherData) {
+  if (!currentWeather) {
     return null;
   }
+  const offset = currentWeather.timezone;
 
   const time = new Date().toLocaleTimeString('en-US', {
     hour: '2-digit',
@@ -33,8 +33,8 @@ function Calendar() {
     month: 'long',
   });
 
-  const sunriseTime = `${getTime(currentWeatherData.sunrise, timezoneOffset)} AM`;
-  const sunsetTime = `${getTime(currentWeatherData.sunset, timezoneOffset)} PM`;
+  const sunriseTime = `${getTime(currentWeather.sys.sunrise, offset)} AM`;
+  const sunsetTime = `${getTime(currentWeather.sys.sunset, offset)} PM`;
 
   return (
     <div className={style.container}>

@@ -1,29 +1,25 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AppDispatch, AppRootState} from './store';
+import {AppDispatch} from './store';
 import geocodingAPI from '../api/geocoding-api';
 import openWeatherAPI from '../api/openweather-api';
-import {Coordinates, CurrentWeather, DailyForecast} from '../api/types';
+import {Coordinates, CurrentWeather, DailyForecast, HourlyWeather} from '../api/types';
+import stormglassAPI from '../api/stormflass-api';
+import {generateKey} from '../App';
 
 type InitialState = {
   placeName: string;
   coordinates: null | Coordinates;
-  weatherData: {
-    timezone: string;
-    offset: number;
-    current: null | CurrentWeather;
-    daily: null | DailyForecast[];
-  };
+  currentWeather: null | CurrentWeather;
+  dailyWeather: null | DailyForecast[];
+  hourlyWeather: HourlyWeather[];
 };
 
 const initialState: InitialState = {
   placeName: '',
   coordinates: null,
-  weatherData: {
-    timezone: '',
-    offset: 0,
-    current: null,
-    daily: null,
-  },
+  currentWeather: null,
+  dailyWeather: null,
+  hourlyWeather: [],
 };
 
 export const weatherSlice = createSlice({
@@ -36,16 +32,14 @@ export const weatherSlice = createSlice({
     setCoordinates: (state, action: PayloadAction<{coordinates: number[]}>) => {
       state.coordinates = {longitude: action.payload.coordinates[0], latitude: action.payload.coordinates[1]};
     },
-    setWeatherData: (
-      state,
-      action: PayloadAction<{current: CurrentWeather; daily: DailyForecast[]; timezone: string; offset: number}>,
-    ) => {
-      state.weatherData = action.payload;
+    setCurrentWeather: (state, action: PayloadAction<CurrentWeather>) => {
+      state.currentWeather = action.payload;
     },
-    setWeatherDataFromCache: (state, action: PayloadAction<InitialState>) => {
-      state.placeName = action.payload.placeName;
-      state.coordinates = action.payload.coordinates;
-      state.weatherData = action.payload.weatherData;
+    setDailyWeather: (state, action: PayloadAction<DailyForecast[]>) => {
+      state.dailyWeather = action.payload;
+    },
+    setHourlyWeather: (state, action: PayloadAction<HourlyWeather[]>) => {
+      state.hourlyWeather = action.payload;
     },
   },
 });
@@ -53,7 +47,8 @@ export const weatherSlice = createSlice({
 export const weatherReducer = weatherSlice.reducer;
 
 // actions
-export const {setPlaceName, setCoordinates, setWeatherData, setWeatherDataFromCache} = weatherSlice.actions;
+export const {setPlaceName, setCoordinates, setCurrentWeather, setDailyWeather, setHourlyWeather} =
+  weatherSlice.actions;
 
 // thunk
 export const fetchPlaceName = (lon: number, lat: number) => (dispatch: AppDispatch) => {
@@ -68,15 +63,31 @@ export const fetchCoordinates = (placeName: string) => (dispatch: AppDispatch) =
   });
 };
 
-export const fetchWeatherData =
-  (latitude: number, longitude: number) => (dispatch: AppDispatch, getState: () => AppRootState) => {
-    localStorage.setItem('expiresIn', JSON.stringify(new Date().getTime() + 60 * 60 * 1000));
+export const fetchCurrentWeather = (latitude: number, longitude: number) => (dispatch: AppDispatch) => {
+  localStorage.setItem('expiresIn', JSON.stringify(new Date().getTime() + 3 * 60 * 60 * 1000));
 
-    openWeatherAPI.getDailyForecast(latitude, longitude).then((res) => {
-      const {current, daily, timezone, timezone_offset: offset} = res.data;
-      dispatch(setWeatherData({current, daily, timezone, offset}));
-      const weatherData = getState().weather;
-      const key = weatherData.placeName.split(',')[0];
-      localStorage.setItem(key, JSON.stringify(weatherData));
-    });
-  };
+  openWeatherAPI.getCurrentWeather(latitude, longitude).then((res) => {
+    dispatch(setCurrentWeather(res.data));
+
+    const key = generateKey(latitude, longitude, '_current');
+    localStorage.setItem(key, JSON.stringify(res.data));
+  });
+};
+
+export const fetchDailyWeather = (latitude: number, longitude: number) => (dispatch: AppDispatch) => {
+  openWeatherAPI.getDailyForecast(latitude, longitude).then((res) => {
+    dispatch(setDailyWeather(res.data.daily));
+
+    const key = generateKey(latitude, longitude, '_daily');
+    localStorage.setItem(key, JSON.stringify(res.data.daily));
+  });
+};
+
+export const fetchHourlyWeatherData = (latitude: number, longitude: number) => (dispatch: AppDispatch) => {
+  stormglassAPI.getHourlyForecast(latitude, longitude).then((res) => {
+    dispatch(setHourlyWeather(res.data.hours));
+
+    const key = generateKey(latitude, longitude, '_hourly');
+    localStorage.setItem(key, JSON.stringify(res.data));
+  });
+};

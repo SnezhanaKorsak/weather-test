@@ -17,21 +17,9 @@ export type Weather = {
 
 export type DailyForecast = {
   dt: number;
-  sunrise: number;
-  sunset: number;
   temp: Temperature;
   weather: Weather[];
-  clouds: number;
 };
-
-export interface CurrentWeather {
-  dt: number;
-  sunrise: number;
-  sunset: number;
-  temp: number;
-  wind_speed: number;
-  weather: Weather[];
-}
 
 export type Place = {
   id: string;
@@ -46,11 +34,23 @@ export interface GeocodingResponse {
   features: Place[];
 }
 
-export type ForecastResponseForOpenWeather = {
-  lat: number;
-  lon: number;
-  timezone: string;
-  timezone_offset: number;
-  current: CurrentWeather;
+export interface CurrentWeather {
+  weather: Weather[];
+  main: {temp: number};
+  dt: number;
+  sys: {sunrise: number; sunset: number};
+  timezone: number;
+}
+
+export type DailyWeather = {
   daily: DailyForecast[];
+};
+
+export type HourlyWeather = {
+  airTemperature: {noaa: number};
+  time: string;
+};
+
+export type ForecastResponseForStormGlass = {
+  hours: HourlyWeather[];
 };

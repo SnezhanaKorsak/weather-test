@@ -11,7 +11,7 @@ const geocodingAPI = {
     return instance.get<GeocodingResponse>(`${longitude},${latitude}.json?types=place&access_token=${APIkey}`);
   },
   searchPlaceByName(placeName: string) {
-    return instance.get<GeocodingResponse>(`${placeName}.json?access_token=${APIkey}`);
+    return instance.get<GeocodingResponse>(`${placeName}.json?language=en&access_token=${APIkey}`);
   },
 };
 

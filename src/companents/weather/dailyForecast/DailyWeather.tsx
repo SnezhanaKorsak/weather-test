@@ -4,7 +4,7 @@ import DailyItem from './DailyItem';
 import style from './DailyWeather.module.scss';
 
 function DailyWeather() {
-  const dailyWeather = useAppSelector((state) => state.weather.weatherData.daily);
+  const dailyWeather = useAppSelector((state) => state.weather.dailyWeather);
 
   if (!dailyWeather) {
     return null;

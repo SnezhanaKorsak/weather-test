@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
+import {shallowEqual} from 'react-redux';
 import debounce from 'lodash.debounce';
 import {useAppDispatch, useAppSelector} from '../../state/hooks';
-import {fetchCoordinates, fetchPlaceName, fetchWeatherData, setWeatherDataFromCache} from '../../state/weatherReducer';
+import {fetchCoordinates, fetchCurrentWeather, fetchPlaceName, setCurrentWeather} from '../../state/weatherReducer';
 import style from './SearchField.module.scss';
+import {generateKey} from '../../App';
 
 type SearchFieldProps = {
   placeName: string;
@@ -14,7 +16,7 @@ function SearchField({placeName}: SearchFieldProps) {
   const countryName = placeName.split(',')[index];
 
   const dispatch = useAppDispatch();
-  const coordinates = useAppSelector((state) => state.weather.coordinates);
+  const coordinates = useAppSelector((state) => state.weather.coordinates, shallowEqual);
 
   const [address, setAddress] = useState(placeName.split(',')[0]);
   const [disabled, setDisabled] = useState(false);
@@ -29,16 +31,20 @@ function SearchField({placeName}: SearchFieldProps) {
 
   const sendRequest = () => {
     setDisabled(true);
-    const weatherDataFromCache = localStorage.getItem(address);
 
-    if (weatherDataFromCache) {
-      dispatch(setWeatherDataFromCache(JSON.parse(weatherDataFromCache)));
-      setDisabled(false);
-    } else if (coordinates) {
-      const {latitude, longitude} = coordinates;
-      dispatch(fetchPlaceName(longitude, latitude));
-      dispatch(fetchWeatherData(latitude, longitude));
-      setDisabled(false);
+    if (coordinates) {
+      const key = generateKey(coordinates?.latitude, coordinates?.longitude, '_current');
+      const dataFromCache = localStorage.getItem(key);
+
+      if (dataFromCache) {
+        dispatch(setCurrentWeather(JSON.parse(dataFromCache)));
+        setDisabled(false);
+      } else {
+        const {latitude, longitude} = coordinates;
+        dispatch(fetchPlaceName(longitude, latitude));
+        dispatch(fetchCurrentWeather(latitude, longitude));
+        setDisabled(false);
+      }
     }
   };
 

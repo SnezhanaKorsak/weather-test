@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
 import Calendar from './companents/calendar/Calendar';
 import SearchField from './companents/searchfield/SearchField';
-import Weather from './companents/weather/Weather';
 import {useAppDispatch, useAppSelector} from './state/hooks';
-import {fetchPlaceName, fetchWeatherData} from './state/weatherReducer';
+import {fetchCurrentWeather, fetchPlaceName, setCurrentWeather} from './state/weatherReducer';
 import style from './App.module.scss';
 import clearImg from './assets/images/clear.jpg';
 import stormImg from './assets/images/thunderstorm.jpg';
@@ -12,31 +11,43 @@ import rainImg from './assets/images/rain.jpg';
 import snowImg from './assets/images/snow.jpg';
 import fogImg from './assets/images/fog.jpg';
 import cloudsImg from './assets/images/clouds.jpg';
+import Weather from './companents/weather/Weather';
+
+export const generateKey = (latitude: number, longitude: number, id: string) =>
+  `${latitude.toFixed(2)},${longitude.toFixed(2)}${id}`;
 
 function App() {
   const dispatch = useAppDispatch();
   const placeName = useAppSelector((state) => state.weather.placeName);
-  const icon = useAppSelector((state) => state.weather.weatherData.current?.weather[0].icon);
+  const icon = useAppSelector((state) => state.weather.currentWeather?.weather[0].icon);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((res) => {
       const {latitude, longitude} = res.coords;
       dispatch(fetchPlaceName(longitude, latitude));
-      dispatch(fetchWeatherData(latitude, longitude));
+
+      const key = generateKey(latitude, longitude, '_current');
+      const dataFromCache = localStorage.getItem(key);
+
+      if (dataFromCache) {
+        dispatch(setCurrentWeather(JSON.parse(dataFromCache)));
+      } else {
+        dispatch(fetchCurrentWeather(latitude, longitude));
+      }
     });
   }, []);
 
-  useEffect(() => {
-    const expiresIn = localStorage.getItem('expiresIn');
-
-    if (expiresIn) {
-      const currentTimestamp = new Date().getTime();
-
-      if (currentTimestamp >= +expiresIn) {
-        localStorage.clear();
-      }
-    }
-  });
+  // useEffect(() => {
+  //   const expiresIn = localStorage.getItem('expiresIn');
+  //
+  //   if (expiresIn) {
+  //     const currentTimestamp = new Date().getTime();
+  //
+  //     if (currentTimestamp >= +expiresIn) {
+  //       localStorage.clear();
+  //     }
+  //   }
+  // });
 
   if (!placeName) {
     return null;
