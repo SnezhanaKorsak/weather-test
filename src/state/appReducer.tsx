@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 export type TypeForecastData = 'daily' | 'hourly';
 
 const initialState = {
-  typeForecastData: 'hourly' as TypeForecastData,
+  typeForecastData: 'daily' as TypeForecastData,
 };
 
 export const appSlice = createSlice({
