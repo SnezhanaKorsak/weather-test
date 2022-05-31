@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../state/hooks';
 import {fetchCoordinates, fetchCurrentWeather, fetchPlaceName, setCurrentWeather} from '../../state/weatherReducer';
 import style from './SearchField.module.scss';
 import {generateKey} from '../../App';
+import Toggle from '../toggle/Toggle';
 
 type SearchFieldProps = {
   placeName: string;
@@ -70,6 +71,11 @@ function SearchField({placeName}: SearchFieldProps) {
         <button type="button" onClick={sendRequest} disabled={disabled}>
           Search
         </button>
+      </div>
+      <div className={style.toggle}>
+        HOUR
+        <Toggle />
+        DAY
       </div>
     </div>
   );

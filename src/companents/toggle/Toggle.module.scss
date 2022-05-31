@@ -1,0 +1,43 @@
+@import "../../sass/variables";
+
+.container {
+  width: 50px;
+  height: 20px;
+  border-radius: 10px;
+
+  .switch {
+    .track {
+      display: inline-block;
+      width: 50px;
+      height: 20px;
+      border-radius: 7px;
+      background: rgba(63, 64, 71, 0.7);
+      transition: background 1000ms;
+
+      .thumb {
+        display: inline-block;
+        width: 25px;
+        height: 20px;
+        border-radius: 7px;
+        background-color: #28374e;
+        text-align: center;
+        transition: transform 400ms;
+
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    input:checked + .track {
+      .thumb {
+        transform: translateX(-26px);
+
+        @media (max-width: $phone) {
+          transform: translateX(26px);
+        }
+      }
+    }
+  }
+}

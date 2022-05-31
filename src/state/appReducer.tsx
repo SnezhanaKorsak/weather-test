@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-type TypeForecastData = 'daily' | 'hourly';
+export type TypeForecastData = 'daily' | 'hourly';
 
 const initialState = {
   typeForecastData: 'hourly' as TypeForecastData,
@@ -10,8 +10,8 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    changeTypeSearch: (state, action: PayloadAction<{typeForecastData: TypeForecastData}>) => {
-      state.typeForecastData = action.payload.typeForecastData;
+    changeTypeSearch: (state, action: PayloadAction<TypeForecastData>) => {
+      state.typeForecastData = action.payload;
     },
   },
 });

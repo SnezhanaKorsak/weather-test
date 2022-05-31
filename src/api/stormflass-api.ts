@@ -4,7 +4,7 @@ import {ForecastResponseForStormGlass} from './types';
 const instance = axios.create({
   baseURL: 'https://api.stormglass.io/v2/weather/',
   headers: {
-    Authorization: 'ee792244-e067-11ec-becb-0242ac130002-ee7922bc-e067-11ec-becb-0242ac130002',
+    Authorization: 'f01dc6b8-e0d0-11ec-b706-0242ac130002-f01dc76c-e0d0-11ec-b706-0242ac130002',
   },
 });
 

@@ -2,10 +2,17 @@
 
 .container {
   grid-area: search;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   padding: 20px;
   text-align: right;
 
   @media (max-width: $phone) {
+    display: grid;
+    grid-template-areas: 'location toggle' 'search search';
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
     text-align: left;
   }
 
@@ -13,6 +20,7 @@
     margin: 5px 0 20px 0;
 
     @media (max-width: $phone) {
+      grid-area: location;
       margin-bottom: 10px;
     }
 
@@ -33,6 +41,10 @@
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
+
+    @media (max-width: $phone) {
+      grid-area: search;
+    }
 
     & > input {
       width: 100%;
@@ -58,6 +70,22 @@
         background-color: darkgray;
         cursor: not-allowed;
       }
+    }
+  }
+
+  .toggle {
+    width: 125px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 14px;
+
+    @media (max-width: $phone) {
+      grid-area: toggle;
+      flex-direction: row;
+      margin-top: 0;
     }
   }
 }

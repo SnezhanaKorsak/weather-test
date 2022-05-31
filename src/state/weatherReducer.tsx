@@ -64,7 +64,7 @@ export const fetchCoordinates = (placeName: string) => (dispatch: AppDispatch) =
 };
 
 export const fetchCurrentWeather = (latitude: number, longitude: number) => (dispatch: AppDispatch) => {
-  localStorage.setItem('expiresIn', JSON.stringify(new Date().getTime() + 3 * 60 * 60 * 1000));
+  localStorage.setItem('expiresIn', JSON.stringify(new Date().getTime() + 6 * 60 * 60 * 1000));
 
   openWeatherAPI.getCurrentWeather(latitude, longitude).then((res) => {
     dispatch(setCurrentWeather(res.data));

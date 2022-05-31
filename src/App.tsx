@@ -37,17 +37,17 @@ function App() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   const expiresIn = localStorage.getItem('expiresIn');
-  //
-  //   if (expiresIn) {
-  //     const currentTimestamp = new Date().getTime();
-  //
-  //     if (currentTimestamp >= +expiresIn) {
-  //       localStorage.clear();
-  //     }
-  //   }
-  // });
+  useEffect(() => {
+    const expiresIn = localStorage.getItem('expiresIn');
+
+    if (expiresIn) {
+      const currentTimestamp = new Date().getTime();
+
+      if (currentTimestamp >= +expiresIn) {
+        localStorage.clear();
+      }
+    }
+  });
 
   if (!placeName) {
     return null;
