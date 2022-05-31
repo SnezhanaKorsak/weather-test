@@ -3,8 +3,9 @@
 .container {
   grid-area: weather;
   display: grid;
-  grid-template-columns: 30% 70%;
-  background-color: rgba(36, 37, 43, 0.5);
+  grid-template-columns: 25% 75%;
+  align-items: center;
+  background-color: rgba(63, 64, 71, 0.5);
   padding: 20px;
 
   @media (max-width: $phone) {

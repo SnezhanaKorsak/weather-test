@@ -88,6 +88,6 @@ export const fetchHourlyWeatherData = (latitude: number, longitude: number) => (
     dispatch(setHourlyWeather(res.data.hours));
 
     const key = generateKey(latitude, longitude, '_hourly');
-    localStorage.setItem(key, JSON.stringify(res.data));
+    localStorage.setItem(key, JSON.stringify(res.data.hours));
   });
 };

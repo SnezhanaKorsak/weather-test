@@ -31,6 +31,10 @@
       grid-template-rows: 25% 50% 25%;
       grid-template-columns: 100% 100%;
     }
+    @media (min-width: $table){
+      width: 75%;
+      height: 75%;
+    }
 
     @media (min-width: $desktop){
       width: 60%;

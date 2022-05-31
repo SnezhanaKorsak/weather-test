@@ -1,5 +1,49 @@
 @import "../../../sass/variables";
 
 .container {
+  margin-top: -10px;
 
+  @media (max-width: $phone) {
+    margin-top: 0;
+  }
+
+  .slider {
+    display: flex;
+
+    .left {
+      border: 10px solid transparent;
+      border-right: 10px solid #28374e;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .day {
+      width: 50px;
+      height: 20px;
+      background-color: #28374e;
+      border-radius: 10px;
+      font-size: 12px;
+      text-align: center;
+      line-height: 20px;
+    }
+
+    .right {
+      border: 10px solid transparent;
+      border-left: 10px solid #28374e;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    .disabled {
+      width: 25px;
+      visibility: hidden;
+    }
+  }
+
+  .itemsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 10px;
+  }
 }
