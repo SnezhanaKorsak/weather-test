@@ -1,8 +1,10 @@
 import React from 'react';
-import {useAppSelector} from '../../../state/hooks';
-import style from './CurrentWeather.module.scss';
 
-function CurrentWeather() {
+import { useAppSelector } from '../../../hooks';
+
+import style from './styled.module.scss';
+
+const CurrentWeather = () => {
   const currentWeather = useAppSelector((state) => state.weather.currentWeather);
 
   if (!currentWeather) {
@@ -22,6 +24,6 @@ function CurrentWeather() {
       </div>
     </div>
   );
-}
+};
 
 export default CurrentWeather;

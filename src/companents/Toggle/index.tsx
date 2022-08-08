@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react';
-import {shallowEqual} from 'react-redux';
-import {changeTypeSearch} from '../../state/appReducer';
-import {useAppDispatch, useAppSelector} from '../../state/hooks';
-import style from './Toggle.module.scss';
+import React, { useEffect } from 'react';
+import { shallowEqual } from 'react-redux';
 
-function Toggle() {
+import { changeTypeSearch } from '../../state/appReducer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import style from './styled.module.scss';
+
+const Toggle = () => {
   const dispatch = useAppDispatch();
   const typeSearch = useAppSelector((state) => state.app.typeForecastData, shallowEqual);
 
@@ -36,6 +38,6 @@ function Toggle() {
       </label>
     </div>
   );
-}
+};
 
 export default Toggle;

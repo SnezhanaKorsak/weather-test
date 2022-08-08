@@ -1,13 +1,9 @@
 import React from 'react';
-import style from './DailyWeather.module.scss';
 
-type DailyItemProps = {
-  dt: number;
-  temperature: number;
-  icon: string;
-};
+import { DailyItemProps } from './types';
+import style from '../DailyForecast/styled.module.scss';
 
-function DailyItem({dt, temperature, icon}: DailyItemProps) {
+const DailyItem = ({ dt, temperature, icon }: DailyItemProps) => {
   const dayWeak = ['Mon', 'Tue', ' Wed', 'Thu', 'Fri', 'Sat', 'Sun'][new Date(dt * 1000).getDay()];
   const temp = `${Math.ceil(temperature)} °`;
 
@@ -20,6 +16,6 @@ function DailyItem({dt, temperature, icon}: DailyItemProps) {
       <div className={style.temp}>{temp}</div>
     </div>
   );
-}
+};
 
 export default DailyItem;

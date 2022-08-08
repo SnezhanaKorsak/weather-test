@@ -43,8 +43,17 @@
     "@typescript-eslint/no-shadow": ["error"],
     "react/prop-types": "off",
     "no-param-reassign": 0,
-    "react-hooks/exhaustive-deps": 0
-
+    "react-hooks/exhaustive-deps": 0,
+    "import/prefer-default-export": "off",
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-empty-function": "off"
   },
   "settings": {
     "import/resolver": {

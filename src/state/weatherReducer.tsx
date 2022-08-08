@@ -1,10 +1,10 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AppDispatch} from './store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppDispatch } from './store';
 import geocodingAPI from '../api/geocoding-api';
 import openWeatherAPI from '../api/openweather-api';
-import {Coordinates, CurrentWeather, DailyForecast, HourlyWeather} from '../api/types';
+import { Coordinates, CurrentWeather, DailyForecast, HourlyWeather } from '../api/types';
 import stormglassAPI from '../api/stormflass-api';
-import {generateKey} from '../App';
+import { generateKey } from '../helpers';
 
 type InitialState = {
   placeName: string;
@@ -26,11 +26,11 @@ export const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
-    setPlaceName: (state, action: PayloadAction<{placeName: string}>) => {
+    setPlaceName: (state, action: PayloadAction<{ placeName: string }>) => {
       state.placeName = action.payload.placeName;
     },
-    setCoordinates: (state, action: PayloadAction<{coordinates: number[]}>) => {
-      state.coordinates = {longitude: action.payload.coordinates[0], latitude: action.payload.coordinates[1]};
+    setCoordinates: (state, action: PayloadAction<{ coordinates: number[] }>) => {
+      state.coordinates = { longitude: action.payload.coordinates[0], latitude: action.payload.coordinates[1] };
     },
     setCurrentWeather: (state, action: PayloadAction<CurrentWeather>) => {
       state.currentWeather = action.payload;
@@ -47,19 +47,19 @@ export const weatherSlice = createSlice({
 export const weatherReducer = weatherSlice.reducer;
 
 // actions
-export const {setPlaceName, setCoordinates, setCurrentWeather, setDailyWeather, setHourlyWeather} =
+export const { setPlaceName, setCoordinates, setCurrentWeather, setDailyWeather, setHourlyWeather } =
   weatherSlice.actions;
 
 // thunk
 export const fetchPlaceName = (lon: number, lat: number) => (dispatch: AppDispatch) => {
   geocodingAPI.searchPlaceByCoordinates(lon, lat).then((res) => {
-    dispatch(setPlaceName({placeName: res.data.features[0].place_name}));
+    dispatch(setPlaceName({ placeName: res.data.features[0].place_name }));
   });
 };
 
 export const fetchCoordinates = (placeName: string) => (dispatch: AppDispatch) => {
   geocodingAPI.searchPlaceByName(placeName).then((res) => {
-    dispatch(setCoordinates({coordinates: res.data.features[0].geometry.coordinates}));
+    dispatch(setCoordinates({ coordinates: res.data.features[0].geometry.coordinates }));
   });
 };
 

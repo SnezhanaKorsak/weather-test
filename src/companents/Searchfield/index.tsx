@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {shallowEqual} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { shallowEqual } from 'react-redux';
 import debounce from 'lodash.debounce';
-import {useAppDispatch, useAppSelector} from '../../state/hooks';
-import {fetchCoordinates, fetchCurrentWeather, fetchPlaceName, setCurrentWeather} from '../../state/weatherReducer';
-import style from './SearchField.module.scss';
-import {generateKey} from '../../App';
-import Toggle from '../toggle/Toggle';
 
-type SearchFieldProps = {
-  placeName: string;
-};
+import Toggle from '../Toggle';
 
-function SearchField({placeName}: SearchFieldProps) {
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchCoordinates, fetchCurrentWeather, fetchPlaceName, setCurrentWeather } from '../../state/weatherReducer';
+import { generateKey } from '../../helpers';
+
+import { SearchFieldProps } from './types';
+import style from './styled.module.scss';
+
+const SearchField = ({ placeName }: SearchFieldProps) => {
   const cityName = placeName.split(',')[0];
   const index = placeName.split(',').length - 1;
   const countryName = placeName.split(',')[index];
@@ -41,7 +41,7 @@ function SearchField({placeName}: SearchFieldProps) {
         dispatch(setCurrentWeather(JSON.parse(dataFromCache)));
         setDisabled(false);
       } else {
-        const {latitude, longitude} = coordinates;
+        const { latitude, longitude } = coordinates;
         dispatch(fetchPlaceName(longitude, latitude));
         dispatch(fetchCurrentWeather(latitude, longitude));
         setDisabled(false);
@@ -79,6 +79,6 @@ function SearchField({placeName}: SearchFieldProps) {
       </div>
     </div>
   );
-}
+};
 
 export default SearchField;

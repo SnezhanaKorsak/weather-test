@@ -1,24 +1,21 @@
-import React, {useState} from 'react';
-import style from './HourlyForecast.module.scss';
-import {useAppSelector} from '../../../state/hooks';
-import HourlyItem from './HourlyItem';
+import React, { useState } from 'react';
 
-function HourlyForecast() {
+import HourlyForecastItem from '../HourlyForecastItem';
+import { useAppSelector } from '../../../../hooks';
+
+import style from './styled.module.scss';
+import { getTime } from '../../../../helpers';
+
+const step = 24;
+
+const HourlyForecast = () => {
   const hourlyWeather = useAppSelector((state) => state.weather.hourlyWeather);
 
-  const step = 24;
   const [portion, setPortion] = useState(0);
 
   if (!hourlyWeather) {
     return null;
   }
-
-  const getTime = (value: string) =>
-    new Date(value).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-      timeZone: 'UTC',
-    });
 
   const days = hourlyWeather.map((item) => new Date(item.time).getDay()).slice(portion, portion + step);
   const dayWeak = ['Sun', 'Mon', 'Tue', ' Wed', 'Thu', 'Fri', 'Sat'][days[0]];
@@ -28,9 +25,9 @@ function HourlyForecast() {
 
   const data = hourlyWeather
     .slice(portion, portion + step)
-    .map((item) => ({time: getTime(item.time), temp: Math.ceil(item.airTemperature.noaa)}));
+    .map((item) => ({ time: getTime(item.time), temp: Math.ceil(item.airTemperature.noaa) }));
 
-  const hourlyItems = data.map((item) => <HourlyItem key={item.time} data={item} />);
+  const hourlyItems = data.map((item) => <HourlyForecastItem key={item.time} data={item} />);
 
   const classNamePrevious = portion === 0 ? style.disabled : style.left;
   const classNameNext = portion === 144 ? style.disabled : style.right;
@@ -46,6 +43,6 @@ function HourlyForecast() {
       <div className={style.itemsContainer}>{hourlyItems}</div>
     </div>
   );
-}
+};
 
 export default HourlyForecast;

@@ -1,40 +1,20 @@
 import React from 'react';
-import {useAppSelector} from '../../state/hooks';
-import style from './Calendar.module.scss';
 
-const getTime = (time: number, offset: number) => {
-  const dt = new Date((time + offset) * 1000);
-  return dt
-    .toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      timeZone: 'UTC',
-    })
-    .slice(0, 5);
-};
+import { useAppSelector } from '../../hooks';
+import { getTimeWithOffset } from '../../helpers';
+import { date, time } from '../../constants';
 
-function Calendar() {
+import style from './styled.module.scss';
+
+const Calendar = () => {
   const currentWeather = useAppSelector((state) => state.weather.currentWeather);
 
   if (!currentWeather) {
     return null;
   }
   const offset = currentWeather.timezone;
-
-  const time = new Date().toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-
-  const date = new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    day: 'numeric',
-    month: 'long',
-  });
-
-  const sunriseTime = `${getTime(currentWeather.sys.sunrise, offset)} AM`;
-  const sunsetTime = `${getTime(currentWeather.sys.sunset, offset)} PM`;
+  const sunriseTime = `${getTimeWithOffset(currentWeather.sys.sunrise, offset)} AM`;
+  const sunsetTime = `${getTimeWithOffset(currentWeather.sys.sunset, offset)} PM`;
 
   return (
     <div className={style.container}>
@@ -56,6 +36,6 @@ function Calendar() {
       </div>
     </div>
   );
-}
+};
 
 export default Calendar;
