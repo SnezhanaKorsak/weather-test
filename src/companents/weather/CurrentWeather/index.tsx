@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { fetchCurrentWeather } from '../../../state/weatherReducer';
+import { fetchCurrentWeather } from '../../../state/sagas/weatherSaga';
 
 import { WeatherProps } from '../WeatherContainer/types';
 import style from './styled.module.scss';

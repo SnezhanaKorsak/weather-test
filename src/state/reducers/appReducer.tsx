@@ -2,8 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type TypeForecastData = 'daily' | 'hourly';
 
+const expireTime = new Date().getTime() + 6 * 60 * 60 * 1000;
+
 const initialState = {
   typeForecastData: 'daily' as TypeForecastData,
+  expireTime,
 };
 
 export const appSlice = createSlice({
@@ -18,5 +21,4 @@ export const appSlice = createSlice({
 
 export const appReducer = appSlice.reducer;
 
-// actions
 export const { changeTypeSearch } = appSlice.actions;

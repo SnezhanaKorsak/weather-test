@@ -5,33 +5,31 @@ import Calendar from '../companents/Calendar';
 import SearchField from '../companents/Searchfield';
 
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchCurrentLocationByCoordinates } from '../state/weatherReducer';
+import { fetchLocationByCoordinates } from '../state/sagas/weatherSaga';
 import { getBackgroundImg } from '../helpers';
 
 import style from './styled.module.scss';
 
 const App = () => {
   const dispatch = useAppDispatch();
-
   const location = useAppSelector((state) => state.weather.currentLocation);
   const weathers = useAppSelector((state) => state.weather.currentWeathers);
+  const expireTime = useAppSelector((state) => state.app.expireTime);
 
   useEffect(() => {
     if (!location) {
       navigator.geolocation.getCurrentPosition((res) => {
         const { latitude, longitude } = res.coords;
-        dispatch(fetchCurrentLocationByCoordinates(longitude, latitude));
+        dispatch(fetchLocationByCoordinates(longitude, latitude));
       });
     }
   }, []);
 
   useEffect(() => {
-    const expireIn = localStorage.getItem('expireIn');
-
-    if (expireIn) {
+    if (expireTime) {
       const currentTimestamp = new Date().getTime();
 
-      if (currentTimestamp >= +expireIn) {
+      if (currentTimestamp >= expireTime) {
         localStorage.clear();
       }
     }

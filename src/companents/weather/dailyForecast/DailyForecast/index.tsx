@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 
 import DailyForecastItem from '../DailyForecastItem';
 
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { fetchDailyWeather } from '../../../../state/sagas/weatherSaga';
+
 import { WeatherProps } from '../../WeatherContainer/types';
 import style from './styled.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { fetchDailyWeather } from '../../../../state/weatherReducer';
 
 const DailyWeather = ({ currentLocation }: WeatherProps) => {
   const dispatch = useAppDispatch();

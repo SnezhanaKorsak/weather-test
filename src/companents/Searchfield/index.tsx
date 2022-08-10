@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import Toggle from '../Toggle';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchCurrentLocationByPlaceName } from '../../state/weatherReducer';
+import { fetchLocationByAddress } from '../../state/sagas/weatherSaga';
 
 import style from './styled.module.scss';
 
@@ -20,7 +20,7 @@ const SearchField = () => {
 
   const sendRequest = () => {
     if (address) {
-      dispatch(fetchCurrentLocationByPlaceName(address));
+      dispatch(fetchLocationByAddress(address));
     }
   };
   const changeHandlerDebounced = debounce((value: string) => {

@@ -1,25 +1,13 @@
-import React, { useEffect } from 'react';
-import { shallowEqual } from 'react-redux';
+import React from 'react';
 
-import { changeTypeSearch } from '../../state/appReducer';
+import { changeTypeSearch } from '../../state/reducers/appReducer';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import style from './styled.module.scss';
 
 const Toggle = () => {
   const dispatch = useAppDispatch();
-  const typeSearch = useAppSelector((state) => state.app.typeForecastData, shallowEqual);
-
-  useEffect(() => {
-    const isCheckedLS = localStorage.getItem('typeSearch');
-    if (isCheckedLS) {
-      dispatch(changeTypeSearch(JSON.parse(isCheckedLS)));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('typeSearch', JSON.stringify(typeSearch));
-  }, [typeSearch]);
+  const typeSearch = useAppSelector((state) => state.app.typeForecastData);
 
   const changeAPI = () => {
     const value = typeSearch === 'daily' ? 'hourly' : 'daily';

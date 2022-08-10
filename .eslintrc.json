@@ -54,7 +54,8 @@
     ],
     "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
   "settings": {
     "import/resolver": {
