@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {CurrentWeather, DailyWeather} from './types';
+import { CurrentForecast, DailyWeather } from './types';
 
 const APIkey = '912143a6f2471bc4aed9039a5dc6d512';
 const instance = axios.create({
@@ -8,7 +8,7 @@ const instance = axios.create({
 
 const openWeatherAPI = {
   getCurrentWeather(latitude: number, longitude: number) {
-    return instance.get<CurrentWeather>(`weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${APIkey}`);
+    return instance.get<CurrentForecast>(`weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${APIkey}`);
   },
   getDailyForecast(latitude: number, longitude: number) {
     return instance.get<DailyWeather>(

@@ -15,12 +15,6 @@ export type Weather = {
   icon: string;
 };
 
-export type DailyForecast = {
-  dt: number;
-  temp: Temperature;
-  weather: Weather[];
-};
-
 export type Place = {
   id: string;
   place_name: string;
@@ -30,27 +24,48 @@ export type Place = {
   };
 };
 
-export interface GeocodingResponse {
-  features: Place[];
+export interface CurrentLocation {
+  name: string;
+  country: string;
+  lat: number;
+  lon: number;
 }
 
-export interface CurrentWeather {
+export interface CurrentForecast {
+  coord: Coordinates;
   weather: Weather[];
-  main: {temp: number};
+  main: { temp: number };
   dt: number;
-  sys: {sunrise: number; sunset: number};
+  sys: { country: string; sunrise: number; sunset: number };
   timezone: number;
+  name: string;
 }
 
-export type DailyWeather = {
-  daily: DailyForecast[];
+export type DailyForecast = {
+  dt: number;
+  temp: Temperature;
+  weather: Weather[];
 };
 
-export type HourlyWeather = {
-  airTemperature: {noaa: number};
+export type HourlyForecast = {
+  airTemperature: { noaa: number };
   time: string;
 };
 
 export type ForecastResponseForStormGlass = {
-  hours: HourlyWeather[];
+  hours: HourlyForecast[];
+};
+
+export type CurrentWeather = CurrentForecast & {
+  id: string;
+};
+
+export type DailyWeather = {
+  id: string;
+  daily: DailyForecast[];
+};
+
+export type HourlyWeather = {
+  id: string;
+  hourly: HourlyForecast[];
 };

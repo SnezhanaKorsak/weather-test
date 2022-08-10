@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { fetchCurrentWeather } from '../../../state/weatherReducer';
 
+import { WeatherProps } from '../WeatherContainer/types';
 import style from './styled.module.scss';
 
-const CurrentWeather = () => {
-  const currentWeather = useAppSelector((state) => state.weather.currentWeather);
+const CurrentWeather = ({ currentLocation }: WeatherProps) => {
+  const dispatch = useAppDispatch();
+  const weathers = useAppSelector((state) => state.weather.currentWeathers);
+
+  const { lat, lon, name } = currentLocation;
+  const currentWeather = weathers.find((item) => item.id === name);
+
+  useEffect(() => {
+    if (!currentWeather) {
+      dispatch(fetchCurrentWeather(lat, lon));
+    }
+  }, [currentLocation]);
 
   if (!currentWeather) {
     return null;

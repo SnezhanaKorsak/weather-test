@@ -1,53 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { shallowEqual } from 'react-redux';
+import React, { useState } from 'react';
 import debounce from 'lodash.debounce';
 
 import Toggle from '../Toggle';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchCoordinates, fetchCurrentWeather, fetchPlaceName, setCurrentWeather } from '../../state/weatherReducer';
-import { generateKey } from '../../helpers';
+import { fetchCurrentLocationByPlaceName } from '../../state/weatherReducer';
 
-import { SearchFieldProps } from './types';
 import style from './styled.module.scss';
 
-const SearchField = ({ placeName }: SearchFieldProps) => {
-  const cityName = placeName.split(',')[0];
-  const index = placeName.split(',').length - 1;
-  const countryName = placeName.split(',')[index];
-
+const SearchField = () => {
   const dispatch = useAppDispatch();
-  const coordinates = useAppSelector((state) => state.weather.coordinates, shallowEqual);
 
-  const [address, setAddress] = useState(placeName.split(',')[0]);
-  const [disabled, setDisabled] = useState(false);
+  const currentLocation = useAppSelector((state) => state.weather.currentLocation);
 
-  useEffect(() => {
-    dispatch(fetchCoordinates(address));
-  }, [address]);
+  const [address, setAddress] = useState('');
 
+  const cityName = currentLocation?.name;
+  const countryName = currentLocation?.country;
+
+  const sendRequest = () => {
+    if (address) {
+      dispatch(fetchCurrentLocationByPlaceName(address));
+    }
+  };
   const changeHandlerDebounced = debounce((value: string) => {
     setAddress(value);
   }, 1000);
-
-  const sendRequest = () => {
-    setDisabled(true);
-
-    if (coordinates) {
-      const key = generateKey(coordinates?.latitude, coordinates?.longitude, '_current');
-      const dataFromCache = localStorage.getItem(key);
-
-      if (dataFromCache) {
-        dispatch(setCurrentWeather(JSON.parse(dataFromCache)));
-        setDisabled(false);
-      } else {
-        const { latitude, longitude } = coordinates;
-        dispatch(fetchPlaceName(longitude, latitude));
-        dispatch(fetchCurrentWeather(latitude, longitude));
-        setDisabled(false);
-      }
-    }
-  };
 
   const pressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -58,17 +36,15 @@ const SearchField = ({ placeName }: SearchFieldProps) => {
   return (
     <div className={style.container}>
       <div className={style.location}>
-        <span className={style.city}>{cityName}</span>
-        <span className={style.country}>{countryName}</span>
+        <span className={style.city}>{`${cityName}, ${countryName}`}</span>
       </div>
       <div className={style.search}>
         <input
           type="text"
-          placeholder={address}
           onChange={(event) => changeHandlerDebounced(event.currentTarget.value)}
           onKeyPress={pressHandler}
         />
-        <button type="button" onClick={sendRequest} disabled={disabled}>
+        <button type="button" onClick={sendRequest}>
           Search
         </button>
       </div>

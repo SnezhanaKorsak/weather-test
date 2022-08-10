@@ -5,55 +5,48 @@ import Calendar from '../companents/Calendar';
 import SearchField from '../companents/Searchfield';
 
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchCurrentWeather, fetchPlaceName, setCurrentWeather } from '../state/weatherReducer';
-import { generateKey, getBackgroundImg } from '../helpers';
+import { fetchCurrentLocationByCoordinates } from '../state/weatherReducer';
+import { getBackgroundImg } from '../helpers';
 
 import style from './styled.module.scss';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const placeName = useAppSelector((state) => state.weather.placeName);
-  const icon = useAppSelector((state) => state.weather.currentWeather?.weather[0].icon);
+
+  const location = useAppSelector((state) => state.weather.currentLocation);
+  const weathers = useAppSelector((state) => state.weather.currentWeathers);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((res) => {
-      const { latitude, longitude } = res.coords;
-      dispatch(fetchPlaceName(longitude, latitude));
-
-      const key = generateKey(latitude, longitude, '_current');
-      const dataFromCache = localStorage.getItem(key);
-
-      if (dataFromCache) {
-        dispatch(setCurrentWeather(JSON.parse(dataFromCache)));
-      } else {
-        dispatch(fetchCurrentWeather(latitude, longitude));
-      }
-    });
+    if (!location) {
+      navigator.geolocation.getCurrentPosition((res) => {
+        const { latitude, longitude } = res.coords;
+        dispatch(fetchCurrentLocationByCoordinates(longitude, latitude));
+      });
+    }
   }, []);
 
   useEffect(() => {
-    const expiresIn = localStorage.getItem('expiresIn');
+    const expireIn = localStorage.getItem('expireIn');
 
-    if (expiresIn) {
+    if (expireIn) {
       const currentTimestamp = new Date().getTime();
 
-      if (currentTimestamp >= +expiresIn) {
+      if (currentTimestamp >= +expireIn) {
         localStorage.clear();
       }
     }
   });
 
-  if (!placeName) {
-    return null;
-  }
+  const currentWeather = weathers.find((item) => item.id === location?.name);
 
+  const icon = currentWeather?.weather[0].icon;
   const backgroundImg = getBackgroundImg(icon);
 
   return (
     <div className={style.app} style={backgroundImg}>
       <div className={style.container}>
         <Calendar />
-        <SearchField placeName={placeName} />
+        <SearchField />
         <WeatherContainer />
       </div>
     </div>

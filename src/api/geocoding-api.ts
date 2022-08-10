@@ -1,17 +1,16 @@
 import axios from 'axios';
-import {GeocodingResponse} from './types';
+import { CurrentLocation } from './types';
 
-const APIkey = 'pk.eyJ1Ijoic25lemhhbmEyOCIsImEiOiJja3liZHo0NjIwZW9jMzBvZDY0MjdveXVtIn0.Z9GOZIEWFStUHnAT-COL2g';
+const APIkey = '912143a6f2471bc4aed9039a5dc6d512';
 const instance = axios.create({
-  baseURL: 'https://api.mapbox.com/geocoding/v5/mapbox.places/',
+  baseURL: 'http://api.openweathermap.org/geo/1.0/',
 });
-
 const geocodingAPI = {
-  searchPlaceByCoordinates(longitude: number, latitude: number) {
-    return instance.get<GeocodingResponse>(`${longitude},${latitude}.json?types=place&access_token=${APIkey}`);
+  getPlaceNameByCoordinates(longitude: number, latitude: number) {
+    return instance.get<CurrentLocation[]>(`reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${APIkey}`);
   },
-  searchPlaceByName(placeName: string) {
-    return instance.get<GeocodingResponse>(`${placeName}.json?language=en&access_token=${APIkey}`);
+  getCoordinatesByPlaceName(placeName: string) {
+    return instance.get<CurrentLocation[]>(`direct?q=${placeName}&limit=1&appid=${APIkey}`);
   },
 };
 

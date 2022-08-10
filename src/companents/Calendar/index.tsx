@@ -7,14 +7,14 @@ import { date, time } from '../../constants';
 import style from './styled.module.scss';
 
 const Calendar = () => {
-  const currentWeather = useAppSelector((state) => state.weather.currentWeather);
+  const currentWeather = useAppSelector((state) => state.weather);
 
   if (!currentWeather) {
     return null;
   }
-  const offset = currentWeather.timezone;
-  const sunriseTime = `${getTimeWithOffset(currentWeather.sys.sunrise, offset)} AM`;
-  const sunsetTime = `${getTimeWithOffset(currentWeather.sys.sunset, offset)} PM`;
+  // const offset = currentWeather.timezone;
+  // const sunriseTime = `${getTimeWithOffset(currentWeather.sys.sunrise, offset)} AM`;
+  // const sunsetTime = `${getTimeWithOffset(currentWeather.sys.sunset, offset)} PM`;
 
   return (
     <div className={style.container}>
@@ -25,12 +25,12 @@ const Calendar = () => {
       <div className={style.date}>{date}</div>
       <div className={style.timeBlock}>
         <div className={style.period}>
-          <div className={style.point}>{sunriseTime}</div>
+          {/* <div className={style.point}>{sunriseTime}</div> */}
           <div className={style.description}>Sunrise</div>
         </div>
         <div className={style.separator} />
         <div className={style.period}>
-          <div className={style.point}>{sunsetTime}</div>
+          {/*  <div className={style.point}>{sunsetTime}</div> */}
           <div className={style.description}>Sunset</div>
         </div>
       </div>
