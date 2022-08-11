@@ -1,0 +1,25 @@
+@import "../../../sass/variables";
+
+.block {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  margin-top: 10px;
+  font-size: 14px;
+
+  .event{
+    display: flex;
+    margin-top: 5px;
+
+    .date {
+      min-width: 90px;
+      height: 20px;
+      background-color: #28374e;
+      border-radius: 5px;
+      text-align: center;
+      margin-right: 5px;
+    }
+  }
+
+
+}

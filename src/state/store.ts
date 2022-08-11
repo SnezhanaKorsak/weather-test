@@ -10,6 +10,7 @@ import { rootSaga } from './sagas';
 const rootPersistConfig = {
   key: 'root',
   storage,
+  blacklist: ['calendar'],
 };
 
 const sagaMiddleware = createSagaMiddleware();

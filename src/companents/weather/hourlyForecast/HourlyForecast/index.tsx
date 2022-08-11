@@ -22,7 +22,7 @@ const HourlyForecast = ({ currentLocation }: WeatherProps) => {
 
   useEffect(() => {
     if (!hourlyWeather) {
-      // dispatch(fetchHourlyWeather(lat, lon));
+      dispatch(fetchHourlyWeather(lat, lon));
     }
   }, [currentLocation]);
 

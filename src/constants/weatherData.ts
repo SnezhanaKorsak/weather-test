@@ -29,3 +29,6 @@ export const date = new Date().toLocaleDateString('en-US', {
   day: 'numeric',
   month: 'long',
 });
+
+export const SIGN_IN = 'Sing in your account';
+export const SYNCHRONIZE = 'Upcoming events';

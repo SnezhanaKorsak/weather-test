@@ -26,9 +26,9 @@
 
     @media (max-width: $phone) {
       width: 85%;
-      height: 85%;
+      min-height: 95%;
       grid-template-areas: 'search' 'weather' 'calendar';
-      grid-template-rows: 25% 50% 25%;
+      grid-template-rows: 15% 50% 35%;
       grid-template-columns: 100% 100%;
     }
     @media (min-width: $table){

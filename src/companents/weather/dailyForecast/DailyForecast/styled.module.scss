@@ -11,13 +11,13 @@
 
   .block {
     width: 60px;
-    height: 60px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 
     @media (max-width: $phone) {
+      height: 60px;
       display: grid;
       grid-template-areas: 'day day' 'icon temp';
       grid-template-rows: 50% 50%;
