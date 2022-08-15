@@ -18,11 +18,6 @@ export const backgroundList = [
   { icon: '50d', img: { backgroundImage: `url(${fogImg})` } },
 ];
 
-export const time = new Date().toLocaleTimeString('en-US', {
-  hour: '2-digit',
-  minute: '2-digit',
-});
-
 export const date = new Date().toLocaleDateString('en-US', {
   weekday: 'long',
   year: 'numeric',

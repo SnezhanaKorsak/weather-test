@@ -23,9 +23,17 @@ export const getTimeWithOffset = (time: number, offset: number) => {
     .slice(0, 5);
 };
 
-export const getTime = (value: string) =>
-  new Date(value).toLocaleTimeString([], {
-    hour: '2-digit',
+export const getTime = (value?: string) => {
+  const date = value ? new Date(value) : new Date();
+  return date.toLocaleTimeString('en-US', {
+    hour12: false,
+    hour: 'numeric',
     minute: '2-digit',
-    timeZone: 'UTC',
+  });
+};
+
+export const getDate = (value: string) =>
+  new Date(value).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
   });

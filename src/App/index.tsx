@@ -17,15 +17,6 @@ const App = () => {
   const expireTime = useAppSelector((state) => state.app.expireTime);
 
   useEffect(() => {
-    if (!location) {
-      navigator.geolocation.getCurrentPosition((res) => {
-        const { latitude, longitude } = res.coords;
-        dispatch(fetchLocationByCoordinates(longitude, latitude));
-      });
-    }
-  }, []);
-
-  useEffect(() => {
     if (expireTime) {
       const currentTimestamp = new Date().getTime();
 
@@ -34,6 +25,15 @@ const App = () => {
       }
     }
   });
+
+  useEffect(() => {
+    if (!location) {
+      navigator.geolocation.getCurrentPosition((res) => {
+        const { latitude, longitude } = res.coords;
+        dispatch(fetchLocationByCoordinates(longitude, latitude));
+      });
+    }
+  }, []);
 
   const currentWeather = weathers.find((item) => item.id === location?.name);
 

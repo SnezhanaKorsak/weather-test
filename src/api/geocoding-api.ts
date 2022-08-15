@@ -3,7 +3,7 @@ import { CurrentLocation } from './types';
 
 const APIkey = '912143a6f2471bc4aed9039a5dc6d512';
 const instance = axios.create({
-  baseURL: 'http://api.openweathermap.org/geo/1.0/',
+  baseURL: 'https://api.openweathermap.org/geo/1.0/',
 });
 const geocodingAPI = {
   getPlaceNameByCoordinates(longitude: number, latitude: number) {

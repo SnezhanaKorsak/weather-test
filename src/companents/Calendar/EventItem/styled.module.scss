@@ -4,12 +4,14 @@
   display: flex;
   justify-content: start;
   flex-direction: column;
-  margin-top: 10px;
+  margin: 10px 0 0 10px;
   font-size: 14px;
 
   .event{
     display: flex;
     margin-top: 5px;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
 
     .date {
       min-width: 90px;

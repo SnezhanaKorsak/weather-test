@@ -24,6 +24,8 @@
   .eventsContainer {
     height: 60%;
     overflow-y: scroll;
+    direction: rtl;
+    text-align: left;
 
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;

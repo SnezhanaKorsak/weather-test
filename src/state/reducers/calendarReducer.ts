@@ -19,9 +19,12 @@ const calendarSlice = createSlice({
     setEvents: (state, action: PayloadAction<EventsListResponse>) => {
       state.items = action.payload.result.items;
     },
+    setAuth: (state, action: PayloadAction<boolean>) => {
+      state.isAuth = action.payload;
+    },
   },
 });
 
-export const { setEvents } = calendarSlice.actions;
+export const { setEvents, setAuth } = calendarSlice.actions;
 
 export const calendarReducer = calendarSlice.reducer;
