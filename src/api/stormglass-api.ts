@@ -1,10 +1,12 @@
 import axios from 'axios';
-import {ForecastResponseForStormGlass} from './types';
+import { ForecastResponseForStormGlass } from './types';
+
+const APIkey = process.env.REACT_APP_STORM_GLASS_API_KEY;
 
 const instance = axios.create({
   baseURL: 'https://api.stormglass.io/v2/weather/',
   headers: {
-    Authorization: 'f01dc6b8-e0d0-11ec-b706-0242ac130002-f01dc76c-e0d0-11ec-b706-0242ac130002',
+    Authorization: APIkey!,
   },
 });
 
@@ -15,4 +17,5 @@ const stormglassAPI = {
     );
   },
 };
+
 export default stormglassAPI;

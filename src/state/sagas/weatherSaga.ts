@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 
 import geocodingAPI from '../../api/geocoding-api';
 import openWeatherAPI from '../../api/openweather-api';
-import stormglassAPI from '../../api/stormflass-api';
+import stormglassAPI from '../../api/stormglass-api';
 
 import { setCurrentLocation, setCurrentWeather, setDailyWeather, setHourlyWeather } from '../reducers/weatherReducer';
 

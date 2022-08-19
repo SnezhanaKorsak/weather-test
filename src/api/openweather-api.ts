@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CurrentForecast, DailyWeather } from './types';
 
-const APIkey = '912143a6f2471bc4aed9039a5dc6d512';
+const APIkey = process.env.REACT_APP_OPENWEATHER_API_KEY;
 const instance = axios.create({
   baseURL: 'https://api.openweathermap.org/data/2.5/',
 });
