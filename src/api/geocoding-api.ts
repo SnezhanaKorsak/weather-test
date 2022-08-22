@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CurrentLocation } from './types';
+import { CurrentLocation } from '../types/locationTypes';
 
 const APIkey = process.env.REACT_APP_OPENWEATHER_API_KEY;
 

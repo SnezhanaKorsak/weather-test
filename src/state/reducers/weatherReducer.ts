@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 import {
   CurrentForecast,
-  CurrentLocation,
   CurrentWeather,
   DailyForecast,
   DailyWeather,
   HourlyForecast,
   HourlyWeather,
-} from '../../api/types';
+} from '../../types/weatherTypes';
+import { CurrentLocation } from '../../types/locationTypes';
 
 type InitialState = {
   currentLocation: null | CurrentLocation;

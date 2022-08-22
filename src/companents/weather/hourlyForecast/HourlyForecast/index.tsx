@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import HourlyForecastItem from '../HourlyForecastItem';
 
 import { fetchHourlyWeather } from '../../../../state/sagas/weatherSaga';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { useAppDispatch, useWeatherLocation } from '../../../../hooks';
 import { getTime } from '../../../../helpers';
 
 import { WeatherProps } from '../../WeatherContainer/types';
@@ -13,10 +13,9 @@ const step = 24;
 
 const HourlyForecast = ({ currentLocation }: WeatherProps) => {
   const dispatch = useAppDispatch();
-  const weathers = useAppSelector((state) => state.weather.hourlyWeathers);
+  const { hourlyWeather, location } = useWeatherLocation();
 
-  const { lat, lon, name } = currentLocation;
-  const hourlyWeather = weathers.find((item) => item.id === name);
+  const { lat, lon } = location!;
 
   const [portion, setPortion] = useState(0);
 

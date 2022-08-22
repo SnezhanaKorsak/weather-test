@@ -1,5 +1,4 @@
-import React, { MouseEvent} from 'react';
-import { v1 } from 'uuid';
+import React from 'react';
 
 import { EventItem } from './EventItem';
 
@@ -16,12 +15,11 @@ const Calendar = () => {
   const events = useAppSelector((state) => state.calendar.items);
   const isAuth = useAppSelector((state) => state.calendar.isAuth);
 
-  const handleItemClick = (event: MouseEvent<HTMLButtonElement>) => {
-    const buttonLabel = event.currentTarget.textContent;
-    if (buttonLabel === SIGN_IN) {
-      dispatch(authorizedCalendar());
-    } else {
+  const handleItemClick = () => {
+    if (isAuth) {
       dispatch(fetchCalendarEvents());
+    } else {
+      dispatch(authorizedCalendar());
     }
   };
 
@@ -32,10 +30,10 @@ const Calendar = () => {
       <div className={style.time}>{time}</div>
       <div className={style.date}>{date}</div>
       <button className={style.button} type="button" onClick={handleItemClick}>
-        {!isAuth ? SIGN_IN : SYNCHRONIZE}
+        {isAuth ? SYNCHRONIZE : SIGN_IN}
       </button>
       <div className={style.eventsContainer}>
-        {events.length > 0 && events.map((item) => <EventItem key={v1()} {...item} />)}
+        {events.length > 0 && events.map((item) => <EventItem key={item.start.dateTime} {...item} />)}
       </div>
     </div>
   );

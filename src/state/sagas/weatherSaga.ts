@@ -22,7 +22,8 @@ import {
   FetchLocationByAddress,
   FetchLocationByCoordinates,
 } from './types';
-import { CurrentForecast, CurrentLocation, DailyWeather, ForecastResponseForStormGlass } from '../../api/types';
+import { CurrentForecast, DailyWeather, ForecastResponseForStormGlass } from '../../types/weatherTypes';
+import { CurrentLocation } from '../../types/locationTypes';
 
 export const fetchLocationByCoordinates = (longitude: number, latitude: number) => ({
   type: FETCH_LOCATION_BY_COORDINATES,

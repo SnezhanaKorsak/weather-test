@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import debounce from 'lodash.debounce';
+import React, { ChangeEvent, useState } from 'react';
 
 import Toggle from '../Toggle';
 
@@ -23,9 +22,8 @@ const SearchField = () => {
       dispatch(fetchLocationByAddress(address));
     }
   };
-  const changeHandlerDebounced = debounce((value: string) => {
-    setAddress(value);
-  }, 1000);
+
+  const changeHandler = (event: ChangeEvent<HTMLInputElement>) => setAddress(event.currentTarget.value);
 
   const pressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -39,20 +37,12 @@ const SearchField = () => {
         <span className={style.city}>{`${cityName}, ${countryName}`}</span>
       </div>
       <div className={style.search}>
-        <input
-          type="text"
-          onChange={(event) => changeHandlerDebounced(event.currentTarget.value)}
-          onKeyPress={pressHandler}
-        />
+        <input type="text" onChange={changeHandler} onKeyPress={pressHandler} />
         <button type="button" onClick={sendRequest}>
           Search
         </button>
       </div>
-      <div className={style.toggle}>
-        HOUR
-        <Toggle />
-        DAY
-      </div>
+      <Toggle />
     </div>
   );
 };

@@ -1,7 +1,4 @@
-export type Coordinates = {
-  latitude: number;
-  longitude: number;
-};
+import { Coordinates } from './locationTypes';
 
 export type Temperature = {
   day: number;
@@ -14,22 +11,6 @@ export type Weather = {
   description: string;
   icon: string;
 };
-
-export type Place = {
-  id: string;
-  place_name: string;
-  geometry: {
-    type: string;
-    coordinates: number[];
-  };
-};
-
-export interface CurrentLocation {
-  name: string;
-  country: string;
-  lat: number;
-  lon: number;
-}
 
 export interface CurrentForecast {
   coord: Coordinates;
@@ -68,29 +49,4 @@ export type DailyWeather = {
 export type HourlyWeather = {
   id: string;
   hourly: HourlyForecast[];
-};
-
-// calender
-export type EventsListResponse = {
-  result: {
-    items: EventItemResponse[];
-  };
-};
-
-export type EventItemResponse = {
-  created: string;
-  creator: {
-    email: string;
-    self: true;
-  };
-  end: {
-    dateTime: string;
-    timeZone: string;
-  };
-  htmlLink: string;
-  start: {
-    dateTime: string;
-    timeZone: string;
-  };
-  summary: string;
 };

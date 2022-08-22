@@ -4,7 +4,7 @@ import WeatherContainer from '../companents/weather/WeatherContainer';
 import Calendar from '../companents/Calendar';
 import SearchField from '../companents/Searchfield';
 
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector, useWeatherLocation } from '../hooks';
 import { fetchLocationByCoordinates } from '../state/sagas/weatherSaga';
 import { getBackgroundImg } from '../helpers';
 
@@ -12,9 +12,8 @@ import style from './styled.module.scss';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const location = useAppSelector((state) => state.weather.currentLocation);
-  const weathers = useAppSelector((state) => state.weather.currentWeathers);
   const expireTime = useAppSelector((state) => state.app.expireTime);
+  const { currentWeather, location } = useWeatherLocation();
 
   useEffect(() => {
     if (expireTime) {
@@ -34,8 +33,6 @@ const App = () => {
       });
     }
   }, []);
-
-  const currentWeather = weathers.find((item) => item.id === location?.name);
 
   const icon = currentWeather?.weather[0].icon;
   const backgroundImg = getBackgroundImg(icon);

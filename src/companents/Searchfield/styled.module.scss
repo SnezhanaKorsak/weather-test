@@ -74,20 +74,4 @@
       }
     }
   }
-
-  .toggle {
-    width: 125px;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
-    font-size: 14px;
-
-    @media (max-width: $phone) {
-      grid-area: toggle;
-      flex-direction: row;
-      margin-top: -5px;
-    }
-  }
 }

@@ -18,12 +18,8 @@ const WeatherContainer = () => {
 
   return (
     <div className={style.container}>
-      <CurrentWeather currentLocation={currentLocation} />
-      {typeSearch === 'daily' ? (
-        <DailyWeather currentLocation={currentLocation} />
-      ) : (
-        <HourlyForecast currentLocation={currentLocation} />
-      )}
+      <CurrentWeather />
+      {typeSearch === 'daily' ? <DailyWeather /> : <HourlyForecast currentLocation={currentLocation} />}
     </div>
   );
 };

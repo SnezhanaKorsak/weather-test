@@ -18,12 +18,14 @@ const Toggle = () => {
 
   return (
     <div className={style.container}>
+      HOUR
       <label className={style.switch} htmlFor="toggle">
         <input type="checkbox" id="toggle" onClick={changeAPI} checked={checked} hidden readOnly />
         <div className={style.track}>
           <div className={style.thumb} />
         </div>
       </label>
+      DAY
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ForecastResponseForStormGlass } from './types';
+import { ForecastResponseForStormGlass } from '../types/weatherTypes';
 
 const APIkey = process.env.REACT_APP_STORM_GLASS_API_KEY;
 
