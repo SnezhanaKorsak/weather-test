@@ -1,10 +1,10 @@
-import clearImg from '../assets/images/clear.jpg';
-import stormImg from '../assets/images/thunderstorm.jpg';
-import drizzleImg from '../assets/images/drizzle.jpg';
-import rainImg from '../assets/images/rain.jpg';
-import snowImg from '../assets/images/snow.jpg';
-import fogImg from '../assets/images/fog.jpg';
-import cloudsImg from '../assets/images/clouds.jpg';
+import clearImg from '@/assets/images/clear.jpg';
+import stormImg from '@/assets/images/thunderstorm.jpg';
+import drizzleImg from '@/assets/images/drizzle.jpg';
+import rainImg from '@/assets/images/rain.jpg';
+import snowImg from '@/assets/images/snow.jpg';
+import fogImg from '@/assets/images/fog.jpg';
+import cloudsImg from '@/assets/images/clouds.jpg';
 
 export const backgroundList = [
   { icon: '01d', img: { backgroundImage: `url(${clearImg})` } },

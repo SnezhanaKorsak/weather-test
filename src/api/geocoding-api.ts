@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CurrentLocation } from '../types/locationTypes';
+import { CurrentLocation } from '@/types/locationTypes';
 
 const APIkey = process.env.REACT_APP_OPENWEATHER_API_KEY;
 
@@ -8,11 +8,9 @@ const instance = axios.create({
 });
 const geocodingAPI = {
   getPlaceNameByCoordinates(longitude: number, latitude: number) {
-    console.log(APIkey);
     return instance.get<CurrentLocation[]>(`reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${APIkey}`);
   },
   getCoordinatesByPlaceName(placeName: string) {
-    console.log(process.env['GEOCODING_API_KEY ']);
     return instance.get<CurrentLocation[]>(`direct?q=${placeName}&limit=1&appid=${APIkey}`);
   },
 };

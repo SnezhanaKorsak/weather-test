@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
-import DailyForecastItem from '../DailyForecastItem';
+import { useAppDispatch, useWeatherLocation } from '@/hooks';
+import { fetchDailyWeather } from '@/sagas/weatherSaga';
 
-import { useAppDispatch, useWeatherLocation } from '../../../../hooks';
-import { fetchDailyWeather } from '../../../../state/sagas/weatherSaga';
+import DailyForecastItem from '../DailyForecastItem';
 
 import style from './styled.module.scss';
 

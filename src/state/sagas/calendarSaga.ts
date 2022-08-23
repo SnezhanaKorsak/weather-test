@@ -1,10 +1,10 @@
 import { put, call, takeEvery } from 'redux-saga/effects';
 
-import { setEvents, setAuth } from '../reducers/calendarReducer';
-import { apiCalendar } from '../../api/googleCalendar';
+import { apiCalendar } from '@/api/googleCalendar';
 
-import { FETCH_CALENDAR_EVENTS, CALENDAR_AUTHORIZED } from '../../constants';
-import { EventsListResponse } from '../../types/calendarTypes';
+import { FETCH_CALENDAR_EVENTS, CALENDAR_AUTHORIZED } from '@/constants';
+import { EventsListResponse } from '@/types/calendarTypes';
+import { setEvents, setAuth } from '@/reducers/calendarReducer';
 
 export const fetchCalendarEvents = () => ({ type: FETCH_CALENDAR_EVENTS });
 export const authorizedCalendar = () => ({ type: CALENDAR_AUTHORIZED });

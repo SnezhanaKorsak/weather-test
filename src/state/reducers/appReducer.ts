@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PURGE } from 'redux-persist';
 
 export type TypeForecastData = 'daily' | 'hourly';
 
@@ -16,6 +17,9 @@ export const appSlice = createSlice({
     changeTypeSearch: (state, action: PayloadAction<TypeForecastData>) => {
       state.typeForecastData = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
   },
 });
 

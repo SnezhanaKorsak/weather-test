@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { changeTypeSearch } from '../../state/reducers/appReducer';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { changeTypeSearch } from '@/reducers/appReducer';
 
 import style from './styled.module.scss';
 

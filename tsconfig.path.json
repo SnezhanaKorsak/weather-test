@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/api/*": ["api/*"],
+      "@/App": ["App"],
+      "@/assets/*": ["assets/*"],
+      "@/components/*": ["components/*"],
+      "@/weather/*": ["components/weather*"],
+      "@/sagas*": ["state/sagas*"],
+      "@/reducers*": ["state/reducers*"],
+      "@/store": ["state/store.ts"],
+      "@/constants": ["constants"],
+      "@/helpers": ["helpers"],
+      "@/hooks": ["hooks"],
+      "@/sass": ["sass"],
+      "@/types/*": ["types/*"]
+    }
+  }
+}

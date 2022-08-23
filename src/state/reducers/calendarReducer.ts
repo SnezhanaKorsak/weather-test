@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { EventItemResponse, EventsListResponse } from '../../types/calendarTypes';
+import { EventItemResponse, EventsListResponse } from '@/types/calendarTypes';
 
 type InitialState = {
   items: EventItemResponse[];

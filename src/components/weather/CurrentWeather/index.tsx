@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
-import { useAppDispatch, useWeatherLocation } from '../../../hooks';
-import { fetchCurrentWeather } from '../../../state/sagas/weatherSaga';
+import { useAppDispatch, useWeatherLocation } from '@/hooks';
+import { fetchCurrentWeather } from '@/sagas/weatherSaga';
 
 import style from './styled.module.scss';
 

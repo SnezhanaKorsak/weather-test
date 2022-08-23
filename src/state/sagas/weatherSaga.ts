@@ -1,11 +1,9 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
-import geocodingAPI from '../../api/geocoding-api';
-import openWeatherAPI from '../../api/openweather-api';
-import stormglassAPI from '../../api/stormglass-api';
-
-import { setCurrentLocation, setCurrentWeather, setDailyWeather, setHourlyWeather } from '../reducers/weatherReducer';
+import geocodingAPI from '@/api/geocoding-api';
+import openWeatherAPI from '@/api/openweather-api';
+import stormglassAPI from '@/api/stormglass-api';
 
 import {
   FETCH_CURRENT_WEATHER,
@@ -13,8 +11,11 @@ import {
   FETCH_HOURLY_WEATHER,
   FETCH_LOCATION_BY_ADDRESS,
   FETCH_LOCATION_BY_COORDINATES,
-} from '../../constants';
+} from '@/constants';
+import { setCurrentLocation, setCurrentWeather, setDailyWeather, setHourlyWeather } from '@/reducers/weatherReducer';
 
+import { CurrentForecast, DailyWeather, ForecastResponseForStormGlass } from '@/types/weatherTypes';
+import { CurrentLocation } from '@/types/locationTypes';
 import {
   FetchCurrentWeather,
   FetchDailyWeather,
@@ -22,8 +23,6 @@ import {
   FetchLocationByAddress,
   FetchLocationByCoordinates,
 } from './types';
-import { CurrentForecast, DailyWeather, ForecastResponseForStormGlass } from '../../types/weatherTypes';
-import { CurrentLocation } from '../../types/locationTypes';
 
 export const fetchLocationByCoordinates = (longitude: number, latitude: number) => ({
   type: FETCH_LOCATION_BY_COORDINATES,

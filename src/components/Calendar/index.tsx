@@ -1,14 +1,13 @@
 import React from 'react';
 
-import { EventItem } from './EventItem';
+import { EventItem } from '@/components/Calendar/EventItem';
 
-import { authorizedCalendar, fetchCalendarEvents } from '../../state/sagas/calendarSaga';
-
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { SIGN_IN, SYNCHRONIZE, date } from '../../constants';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { SIGN_IN, SYNCHRONIZE, date } from '@/constants';
+import { getTime } from '@/helpers';
+import { authorizedCalendar, fetchCalendarEvents } from '@/sagas/calendarSaga';
 
 import style from './styled.module.scss';
-import { getTime } from '../../helpers';
 
 const Calendar = () => {
   const dispatch = useAppDispatch();

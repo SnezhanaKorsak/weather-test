@@ -1,11 +1,12 @@
 import React from 'react';
 
-import CurrentWeather from '../CurrentWeather';
-import DailyWeather from '../dailyForecast/DailyForecast';
-import HourlyForecast from '../hourlyForecast/HourlyForecast';
+import CurrentWeather from '@/components/weather/CurrentWeather';
+import DailyWeather from '@/components/weather/dailyForecast/DailyForecast';
+import HourlyForecast from '@/components/weather/hourlyForecast/HourlyForecast';
+
+import { useAppSelector } from '@/hooks';
 
 import style from './weather.module.scss';
-import { useAppSelector } from '../../../hooks';
 
 const WeatherContainer = () => {
   const typeSearch = useAppSelector((state) => state.app.typeForecastData);

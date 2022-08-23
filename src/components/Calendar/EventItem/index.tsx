@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { getDate, getTime } from '../../../helpers';
+import { getDate, getTime } from '@/helpers';
 
-import { EventItemResponse } from '../../../types/calendarTypes';
+import { EventItemResponse } from '@/types/calendarTypes';
 import style from './styled.module.scss';
 
 export const EventItem = ({ start, end, summary }: EventItemResponse) => {

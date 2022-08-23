@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useState } from 'react';
 
-import Toggle from '../Toggle';
+import Toggle from '@/components/Toggle';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchLocationByAddress } from '../../state/sagas/weatherSaga';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { fetchLocationByAddress } from '@/sagas/weatherSaga';
 
 import style from './styled.module.scss';
 

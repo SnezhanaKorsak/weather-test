@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import HourlyForecastItem from '../HourlyForecastItem';
+import HourlyForecastItem from '@/components/weather/hourlyForecast/HourlyForecastItem';
 
-import { fetchHourlyWeather } from '../../../../state/sagas/weatherSaga';
-import { useAppDispatch, useWeatherLocation } from '../../../../hooks';
-import { getTime } from '../../../../helpers';
+import { useAppDispatch, useWeatherLocation } from '@/hooks';
+import { getTime } from '@/helpers';
+import { fetchHourlyWeather } from '@/sagas/weatherSaga';
 
 import { WeatherProps } from '../../WeatherContainer/types';
 import style from './styled.module.scss';

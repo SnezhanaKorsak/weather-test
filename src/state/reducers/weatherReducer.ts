@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PURGE } from 'redux-persist';
 import {
   CurrentForecast,
   CurrentWeather,
@@ -6,8 +7,8 @@ import {
   DailyWeather,
   HourlyForecast,
   HourlyWeather,
-} from '../../types/weatherTypes';
-import { CurrentLocation } from '../../types/locationTypes';
+} from '@/types/weatherTypes';
+import { CurrentLocation } from '@/types/locationTypes';
 
 type InitialState = {
   currentLocation: null | CurrentLocation;
@@ -60,6 +61,9 @@ export const weatherSlice = createSlice({
         state.hourlyWeathers.push(newItem);
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
   },
 });
 

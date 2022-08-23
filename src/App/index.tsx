@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 
-import WeatherContainer from '../companents/weather/WeatherContainer';
-import Calendar from '../companents/Calendar';
-import SearchField from '../companents/Searchfield';
+import WeatherContainer from '@/components/weather/WeatherContainer';
+import Calendar from '@/components/Calendar';
+import SearchField from '@/components/Searchfield';
 
-import { useAppDispatch, useAppSelector, useWeatherLocation } from '../hooks';
-import { fetchLocationByCoordinates } from '../state/sagas/weatherSaga';
-import { getBackgroundImg } from '../helpers';
+import { persistor } from '@/store';
+import { useAppDispatch, useAppSelector, useWeatherLocation } from '@/hooks';
+import { getBackgroundImg } from '@/helpers';
+import { fetchLocationByCoordinates } from '@/sagas/weatherSaga';
 
 import style from './styled.module.scss';
 
@@ -20,7 +21,7 @@ const App = () => {
       const currentTimestamp = new Date().getTime();
 
       if (currentTimestamp >= expireTime) {
-        localStorage.clear();
+        persistor.purge();
       }
     }
   });
@@ -32,7 +33,7 @@ const App = () => {
         dispatch(fetchLocationByCoordinates(longitude, latitude));
       });
     }
-  }, []);
+  }, [expireTime]);
 
   const icon = currentWeather?.weather[0].icon;
   const backgroundImg = getBackgroundImg(icon);

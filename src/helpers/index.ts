@@ -1,6 +1,6 @@
-import clearImg from '../assets/images/clear.jpg';
+import clearImg from '@/assets/images/clear.jpg';
 
-import { backgroundList } from '../constants';
+import { backgroundList } from '@/constants';
 
 export const getBackgroundImg = (icon?: string) => {
   const key = icon ? `${icon.slice(0, 2)}d` : '01d';

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CurrentForecast, DailyWeather } from '../types/weatherTypes';
+import { CurrentForecast, DailyWeather } from '@/types/weatherTypes';
 
 const APIkey = process.env.REACT_APP_OPENWEATHER_API_KEY;
 const instance = axios.create({
